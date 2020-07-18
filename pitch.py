@@ -24,9 +24,9 @@ def home():
     return render_template('home.html', posts=posts)
     
 
-@app.route("/about")
-def about():
-    return render_template('category.html', title='About')
+@app.route("/category")
+def category():
+    return render_template('category.html', title='Category')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
