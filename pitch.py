@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'sindet'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
-from models import User, Posts
+from models import User, Post
 posts = [
     {
         'author': 'Sarah Sindet',
