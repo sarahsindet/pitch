@@ -27,7 +27,7 @@ def home():
 
 
 @app.route("/category")
-def about():
+def category():
     return render_template('category.html', title='Category')
 
 
