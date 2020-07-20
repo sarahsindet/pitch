@@ -1,21 +1,22 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from pitch import app, db, bcrypt
 from pitch.forms import RegistrationForm, LoginForm
 from pitch.models import User, Post
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 posts = [
     {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
+        'author': 'sarahsindet',
+        'title': 'Pitch Post 1',
         'content': 'First post content',
-        'date_posted': 'April 20, 2018'
+        'date_posted': 'July 20, 2020'
     },
     {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
+        'author': 'danielsindet',
+        'title': 'Pitch Post 2 ',
         'content': 'Second post content',
-        'date_posted': 'April 21, 2018'
+        'date_posted': 'July 21, 2020'
     }
 ]
 
@@ -41,7 +42,7 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulation and welcome to Pitch! You are now able to log in', 'success')
+        flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -72,3 +73,4 @@ def logout():
 @login_required
 def account():
     return render_template('account.html', title='Account')
+    
