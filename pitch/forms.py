@@ -1,8 +1,9 @@
+
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Required
 from pitch.models import User
 
 
@@ -58,3 +59,9 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
+ 
+class PitchForm(FlaskForm):
+
+    category = StringField('Pitch category',validators=[Required()])
+    content = TextAreaField('Pitch', validators=[Required()])
+    submit = SubmitField('Submit')  

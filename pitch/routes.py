@@ -4,8 +4,8 @@ import PIL
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from pitch import app, db, bcrypt
-from pitch.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from pitch.models import User, Post
+from pitch.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, PitchForm
+from pitch.models import User, Post, Pitch
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -25,9 +25,10 @@ posts = [
 ]
 
 
-@app.route("/")
+app.route("/")
 @app.route("/home")
 def home():
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 
@@ -157,3 +158,74 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('home'))                          
+@app.route('/')
+def index():
+
+    '''
+    View root page function that returns the index page and its data
+    '''
+
+    title = 'PERFECT PITCH!'
+    tech = Pitch.query.filter_by(category='tech')
+    funny = Pitch.query.filter_by(category='funny')
+    life = Pitch.query.filter_by(category='life')
+
+    return render_template('category',title = title,tech=tech,funny=funny,life=life)
+
+
+@app.route('/life', methods = ['GET','POST'])
+def pitch():
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    form = PitchForm()
+
+    if form.validate_on_submit():
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+
+    life = Pitch.query.filter_by(category='life')
+
+    return render_template('life.html',title = 'life',life=life,form=form)
+  
+
+@app.route('/funny', methods = ['GET','POST'])
+def funny():
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    form = PitchForm()
+
+    if form.validate_on_submit():
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+
+    funny = Pitch.query.filter_by(category='funny')
+
+    return render_template('funny.html',title = 'life',funny=funny,form=form)
+
+
+@app.route('/tech', methods = ['GET','POST'])
+def tech():
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    form = PitchForm()
+
+    if form.validate_on_submit():
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+
+    tech = Pitch.query.filter_by(category='tech')
+
+    return render_template('tech.html',title = 'life',tech=tech,form=form)
+      

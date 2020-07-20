@@ -29,3 +29,33 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+class Pitch(db.Model):
+    __tablename__ = 'pitch'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(255))
+    category = db.Column(db.String(255))
+    timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def save_pitch(self):
+        '''
+        Function that saves pitches
+        '''
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_all_pitches(cls):
+        '''
+        Function that queries the databse and returns all the pitches
+        '''
+        return Pitch.query.all()
+
+    @classmethod
+    def get_pitches_by_category(cls,category_id):
+        '''
+        Function that queries the databse and returns pitches based on the
+        category 
+        '''
+        return Pitch.query.filter_by(category_id= category_id)
