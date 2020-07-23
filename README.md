@@ -2,7 +2,7 @@
 ### Author:{Sarah Sindet}
 ,github(https://github.com/sarahsindet)
 ## Description
-NEWS-API is an application that allows one to view posts in different categories ,create an account of their own an add their own posts sources.
+pitch is an application that allows one to view posts in different categories ,create an account of their own an add their own posts sources.
 ### Log in as a user
 You will be able to;
 * See various pitches displayed,e.g *tech pitches *
