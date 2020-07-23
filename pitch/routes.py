@@ -170,7 +170,7 @@ def index():
     funny = Pitch.query.filter_by(category='funny')
     life = Pitch.query.filter_by(category='life')
 
-    return render_template('category',title = title,tech=tech,funny=funny,life=life)
+    return render_template('category.html',title = title,tech=tech,funny=funny,life=life)
 
 
 @app.route('/life', methods = ['GET','POST'])
