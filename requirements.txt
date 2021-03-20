@@ -26,7 +26,7 @@ idna==2.10
 image==1.5.32
 imagesize==1.2.0
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 packaging==20.4
 pguard==0.4.0
